@@ -11,6 +11,8 @@ NZPMC mini project. Learning how to connect the frontend to the backend. In this
 </p>
 
 ### Snapshots
+<img src="https://github.com/DuckyShine004/nzpmc-mini-project/blob/main/snapshots/registration-page.png?raw=true" alt="Registration Page" width="350" height="200"/>
+<img src="https://github.com/DuckyShine004/nzpmc-mini-project/blob/main/snapshots/viewing-page.png?raw=true" alt="Viewing Page" width="400" height="200"/>
 
 ## Getting Started
 
