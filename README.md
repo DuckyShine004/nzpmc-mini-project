@@ -1,5 +1,5 @@
 # nzpmc-mini-project
-NZPMC mini project. Learning how to connect the frontend to the backend. In this project, I learnt how to create a simple website using `React`, but most importantly, learn how the frontend, backend, and database realte to each other to create a fully functional website.
+NZPMC mini project. Learning how to connect the frontend to the backend. In this project, I gained knowledge on building a basic website using `React`. This project has helped me understand the relationship between the frontend, backend, and database, which is crucial for developing a fully functional website.
 
 ### Built With
 <p align="center">
