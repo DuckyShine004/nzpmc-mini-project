@@ -14,10 +14,17 @@ const PORT = process.env.PORT
 app.use(cors())
 app.use(express.json())
 
-// Application requests
+// Application requests (search query code not done by me)
 app.get('/api/users', async (request, response) => {
+  const queryName = request.query.name
+
   try {
-    const users = await Registration.find()
+    let query = {}
+
+    if (queryName) {
+      query.name = {$regex: new RegExp(queryName, 'i')}
+    }
+    const users = await Registration.find(query)
     response.json(users)
   } catch (error) {
     console.log('get request error: ', error.message)
