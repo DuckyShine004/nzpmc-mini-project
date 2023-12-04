@@ -14,8 +14,23 @@ const PORT = process.env.PORT
 app.use(cors())
 app.use(express.json())
 
+// Application error handler
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'ValidationError') {
+    return response.status(400).json({error: error.message})
+  }
+
+  return response.status(500).json({error: 'Internal Server Error'})
+}
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({error: 'Unknown Endpoint Error'})
+}
+
 // Application requests (search query code not done by me)
-app.get('/api/users', async (request, response) => {
+app.get('/api/users', async (request, response, next) => {
   const queryName = request.query.name
 
   try {
@@ -27,11 +42,11 @@ app.get('/api/users', async (request, response) => {
     const users = await Registration.find(query)
     response.json(users)
   } catch (error) {
-    console.log('get request error: ', error.message)
+    next(error)
   }
 })
 
-app.post('/api/registration', async (request, response) => {
+app.post('/api/registration', async (request, response, next) => {
   try {
     const body = request.body
 
@@ -43,11 +58,14 @@ app.post('/api/registration', async (request, response) => {
     const savedRegistration = await registration.save()
     response.json(savedRegistration)
   } catch (error) {
-    console.log('post request error: ', error.message)
+    next(error)
   }
 })
 
 // Application event listener
+app.use(unknownEndpoint)
+app.use(errorHandler)
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
