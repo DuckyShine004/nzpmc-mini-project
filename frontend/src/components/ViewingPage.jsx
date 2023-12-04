@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-import axios from 'axios'
+import registrationService from '../services/registration'
 
 import Heading from "./Heading"
 import UserList from './UserList'
@@ -11,16 +11,16 @@ const ViewingPage = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    const userData = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await axios.get(baseURL)
-        setUsers(response.data)
+        const userData = await registrationService.getAllUser(baseURL)
+        setUsers(userData)
       } catch (error) {
         console.error('Error fetching users:', error.message)
       }
     }
 
-    userData()
+    fetchUsers()
   }, [])
 
   return (
