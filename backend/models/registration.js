@@ -5,10 +5,10 @@ mongoose.set('strictQuery', false)
 const mongoURI = process.env.MONGODB_URI
 
 mongoose.connect(mongoURI)
-  .then(result => {
+  .then(() => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to mongoDB:', error.message)
   })
 

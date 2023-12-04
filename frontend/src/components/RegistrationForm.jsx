@@ -9,9 +9,29 @@ const RegistrationForm = ({onFormSubmit}) => {
   const handleNameChange = (event) => setName(event.target.value)
   const handleDobChange = (event) => setDob(event.target.value)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    onFormSubmit({name, dob})
+
+    try {
+      const response = await fetch('http://localhost:3001/api/registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          dob
+        }),
+      })
+
+      if (response.ok) {
+        console.log('User registered')
+      } else {
+        console.log('Failed to register user')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    }
   }
 
   return (
