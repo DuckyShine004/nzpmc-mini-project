@@ -1,8 +1,9 @@
 import {useState} from 'react'
 
 import FormInput from './FormInput'
+import Heading from './Heading'
 
-const RegistrationForm = ({onFormSubmit}) => {
+const RegistrationForm = () => {
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
 
@@ -35,22 +36,25 @@ const RegistrationForm = ({onFormSubmit}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormInput
-        label="Name"
-        type="text"
-        value={name}
-        onChange={handleNameChange}
-        placeholder="Enter your name"
-      />
-      <FormInput
-        label="DOB"
-        type="date"
-        value={dob}
-        onChange={handleDobChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <Heading heading="Registration Page" />
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          label="Name"
+          type="text"
+          value={name}
+          onChange={handleNameChange}
+          placeholder="Enter your name"
+        />
+        <FormInput
+          label="DOB"
+          type="date"
+          value={dob}
+          onChange={handleDobChange}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   )
 }
 

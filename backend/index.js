@@ -16,8 +16,13 @@ app.use(cors())
 app.use(express.json())
 
 // Application requests
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+app.get('/api/users', async (request, response) => {
+  try {
+    const users = await Registration.find()
+    res.json(users)
+  } catch (error) {
+    console.log(error.message)
+  }
 })
 
 app.post('/api/registration', async (req, res) => {
