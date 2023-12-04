@@ -7,7 +7,7 @@ import Heading from "./Heading"
 const baseURL = '/api/users'
 
 const ViewingPage = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     const userData = async () => {
@@ -15,7 +15,7 @@ const ViewingPage = () => {
         const response = await axios.get(baseURL)
         setUsers(response.data)
       } catch (error) {
-        console.log(error)
+        console.error('Error fetching users:', error.message)
       }
     }
 
@@ -26,14 +26,15 @@ const ViewingPage = () => {
     <div>
       <Heading heading="Viewing Page" />
       <ul>
-        {users.map((user) => {
+        {users.map((user) => (
           <li key={user._id}>
-            Name: {user.name}, DOB: {new Date(user.dob).toLocaleDateString()}
+            Name: {user.name}, DOB: {user.dob ? new Date(user.dob).toLocaleDateString() : 'N/A'}
           </li>
-        })}
+        ))}
       </ul>
     </div>
   )
 }
 
 export default ViewingPage
+
