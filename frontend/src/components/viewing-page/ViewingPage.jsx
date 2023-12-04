@@ -18,7 +18,8 @@ const ViewingPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const userData = await registrationService.getAllUser(baseURL)
+      const url = searchUser ? `${baseURL}?name=${searchUser}` : baseURL
+      const userData = await registrationService.getAllUser(url)
       setUsers(userData)
     } catch (error) {
       console.error('Error fetching users:', error.message)
@@ -33,21 +34,24 @@ const ViewingPage = () => {
     setSearchUser(event.target.value)
   }
 
-  const handleSubmitSearch = () => {
+  const handleSubmitSearch = (event) => {
+    event.preventDefault()
     fetchUsers()
   }
 
   return (
     <div>
       <Heading heading="Viewing Page" />
-      <FormInput
-        label="text"
-        type="text"
-        value={searchUser}
-        onChange={handleSearch}
-        placeHolder="Search For User By Name"
-      />
-      <Button onClick={handleSubmitSearch} text="Search" />
+      <form onSubmit={handleSubmitSearch}>
+        <FormInput
+          label="Search for user"
+          type="text"
+          value={searchUser}
+          onChange={handleSearch}
+          placeHolder="Search by name"
+        />
+        <button type="submit">Search</button>
+      </form>
       <UserList users={users} />
       <Button onClick={() => navigate('/')} text="Go To Registration Page" />
     </div>
