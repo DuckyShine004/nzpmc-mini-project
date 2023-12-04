@@ -1,7 +1,11 @@
 import {useState} from 'react'
 
+import axios from 'axios'
+
 import FormInput from './FormInput'
 import Heading from './Heading'
+
+const baseURL = '/api/registration'
 
 const RegistrationForm = () => {
   const [name, setName] = useState('')
@@ -11,27 +15,17 @@ const RegistrationForm = () => {
   const handleDobChange = (event) => setDob(event.target.value)
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/api/registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          dob
-        }),
+      const response = await axios.post(baseURL, {
+        name,
+        dob
       })
 
-      if (response.ok) {
-        console.log('User registered')
-      } else {
-        console.log('Failed to register user')
-      }
+      console.log('User registered', response.data)
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error:', error.response ? error.response.data : error)
     }
   }
 

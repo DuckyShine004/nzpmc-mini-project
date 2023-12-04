@@ -1,18 +1,25 @@
 import {useState, useEffect} from 'react'
 
+import axios from 'axios'
+
 import Heading from "./Heading"
+
+const baseURL = '/api/users'
 
 const ViewingPage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const userData = async () => {
-      const response = await fetch('https://localhost:3001/api/users')
-      const data = await response.json()
-      setUsers(data)
+      try {
+        const response = await axios.get(baseURL)
+        setUsers(response.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
-    userData().catch(console.error)
+    userData()
   }, [])
 
   return (
@@ -20,7 +27,7 @@ const ViewingPage = () => {
       <Heading heading="Viewing Page" />
       <ul>
         {users.map((user) => {
-          <li key={user.id}>
+          <li key={user._id}>
             Name: {user.name}, DOB: {new Date(user.dob).toLocaleDateString()}
           </li>
         })}
