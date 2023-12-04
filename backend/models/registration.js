@@ -13,8 +13,15 @@ mongoose.connect(mongoURI)
   })
 
 const registrationSchema = new mongoose.Schema({
-  name: String,
-  dob: Date,
+  name: {
+    type: String,
+    required: true,
+    minLength: 5
+  },
+  dob: {
+    type: Date,
+    required: true
+  }
 })
 
 module.exports = mongoose.model('Registration', registrationSchema)
