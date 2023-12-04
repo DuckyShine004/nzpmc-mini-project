@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-import axios from 'axios'
+import registrationService from '../services/registration'
 
 import FormInput from './FormInput'
 import Heading from './Heading'
@@ -18,12 +18,12 @@ const RegistrationForm = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(baseURL, {
+      const newUser = {
         name,
         dob
-      })
-
-      console.log('User registered', response.data)
+      }
+      const registeredUser = await registrationService.createNewUser(baseURL, newUser)
+      console.log('User registered', registeredUser)
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error)
     }
