@@ -1,8 +1,13 @@
 import {useState} from 'react'
 
-import FormInput from './FormInput'
+import axios from 'axios'
 
-const RegistrationForm = ({onFormSubmit}) => {
+import FormInput from './FormInput'
+import Heading from './Heading'
+
+const baseURL = '/api/registration'
+
+const RegistrationForm = () => {
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
 
@@ -10,47 +15,40 @@ const RegistrationForm = ({onFormSubmit}) => {
   const handleDobChange = (event) => setDob(event.target.value)
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/api/registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          dob
-        }),
+      const response = await axios.post(baseURL, {
+        name,
+        dob
       })
 
-      if (response.ok) {
-        console.log('User registered')
-      } else {
-        console.log('Failed to register user')
-      }
+      console.log('User registered', response.data)
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error:', error.response ? error.response.data : error)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormInput
-        label="Name"
-        type="text"
-        value={name}
-        onChange={handleNameChange}
-        placeholder="Enter your name"
-      />
-      <FormInput
-        label="DOB"
-        type="date"
-        value={dob}
-        onChange={handleDobChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <Heading heading="Registration Page" />
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          label="Name"
+          type="text"
+          value={name}
+          onChange={handleNameChange}
+          placeholder="Enter your name"
+        />
+        <FormInput
+          label="DOB"
+          type="date"
+          value={dob}
+          onChange={handleDobChange}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   )
 }
 

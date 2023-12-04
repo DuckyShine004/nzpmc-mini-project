@@ -1,19 +1,18 @@
-import {useState} from 'react'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
-import Heading from "./components/Heading"
 import RegistrationForm from './components/RegistrationForm'
+import ViewingPage from './components/ViewingPage'
 
 const App = () => {
-  const addNote = ({name, dob}) => {
-    // Handle frontend backend connection
-    console.log(name, dob)
-  }
-
   return (
-    <div>
-      <Heading heading="Registration Page" />
-      <RegistrationForm onFormSubmit={addNote} />
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<RegistrationForm />} />
+          <Route path="/view" element={<ViewingPage />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 

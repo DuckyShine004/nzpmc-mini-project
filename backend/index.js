@@ -11,18 +11,22 @@ const Registration = require('./models/registration')
 const app = express()
 const PORT = process.env.PORT
 
-
 app.use(cors())
 app.use(express.json())
 
 // Application requests
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+app.get('/api/users', async (request, response) => {
+  try {
+    const users = await Registration.find()
+    response.json(users)
+  } catch (error) {
+    console.log('get request error: ', error.message)
+  }
 })
 
-app.post('/api/registration', async (req, res) => {
+app.post('/api/registration', async (request, response) => {
   try {
-    const body = req.body
+    const body = request.body
 
     const registration = new Registration({
       name: body.name,
@@ -30,9 +34,9 @@ app.post('/api/registration', async (req, res) => {
     })
 
     const savedRegistration = await registration.save()
-    res.json(savedRegistration)
+    response.json(savedRegistration)
   } catch (error) {
-    console.log(error.message)
+    console.log('post request error: ', error.message)
   }
 })
 
