@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
-import RegistrationForm from './components/RegistrationForm'
-import ViewingPage from './components/ViewingPage'
+import RegistrationForm from './components/registration-page/RegistrationForm'
+import ViewingPage from './components/viewing-page/ViewingPage'
 
 const App = () => {
   return (

@@ -1,11 +1,11 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import registrationService from '../services/registration'
+import registrationService from '../../services/registration'
 
-import FormInput from './FormInput'
-import Heading from './Heading'
-import Button from './Button'
+import FormInput from '../utilities/FormInput'
+import Heading from '../utilities/Heading'
+import Button from '../utilities/Button'
 
 const baseURL = '/api/registration'
 

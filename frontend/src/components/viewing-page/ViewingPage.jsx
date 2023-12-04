@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import registrationService from '../services/registration'
+import registrationService from '../../services/registration'
 
-import Heading from "./Heading"
-import UserList from './UserList'
-import Button from './Button'
+import Heading from '../utilities/Heading'
+import UserList from '../utilities/UserList'
+import Button from '../utilities/Button'
 
 const baseURL = '/api/users'
 
