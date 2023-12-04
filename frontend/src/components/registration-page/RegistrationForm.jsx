@@ -1,15 +1,19 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-import axios from 'axios'
+import registrationService from '../../services/registration'
 
-import FormInput from './FormInput'
-import Heading from './Heading'
+import FormInput from '../utilities/FormInput'
+import Heading from '../utilities/Heading'
+import Button from '../utilities/Button'
 
 const baseURL = '/api/registration'
 
 const RegistrationForm = () => {
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
+
+  const navigate = useNavigate()
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleDobChange = (event) => setDob(event.target.value)
@@ -18,12 +22,12 @@ const RegistrationForm = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(baseURL, {
+      const newUser = {
         name,
         dob
-      })
-
-      console.log('User registered', response.data)
+      }
+      const registeredUser = await registrationService.createNewUser(baseURL, newUser)
+      console.log('User registered', registeredUser)
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error)
     }
@@ -48,6 +52,7 @@ const RegistrationForm = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      <Button onClick={() => navigate('/view')} text="Go To Viewing Page" />
     </div>
   )
 }
