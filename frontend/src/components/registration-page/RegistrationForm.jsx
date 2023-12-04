@@ -7,6 +7,8 @@ import FormInput from '../utilities/FormInput'
 import Heading from '../utilities/Heading'
 import Button from '../utilities/Button'
 
+import '../../styles/RegistrationForm.css'
+
 const baseURL = '/api/registration'
 
 const RegistrationForm = () => {
@@ -62,7 +64,7 @@ const RegistrationForm = () => {
   return (
     <div>
       <Heading heading="Registration Page" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="registration-form">
         <FormInput
           label="Name"
           type="text"
@@ -76,9 +78,11 @@ const RegistrationForm = () => {
           value={dob}
           onChange={handleDobChange}
         />
-        <button type="submit">Submit</button>
+        <div className="button-container">
+          <button type="submit">Submit</button>
+          <Button onClick={() => navigate('/view')} text="Go To Viewing Page" />
+        </div>
       </form>
-      <Button onClick={() => navigate('/view')} text="Go To Viewing Page" />
     </div>
   )
 }
