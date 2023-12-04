@@ -10,6 +10,8 @@ NZPMC mini project. Learning how to connect the frontend to the backend. In this
   <img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white" alt="NPM.io"/>
 </p>
 
+### Snapshots
+
 ## Getting Started
 
 To guarantee a seamless experience moving forward, please read and follow the installation instructions carefully.
