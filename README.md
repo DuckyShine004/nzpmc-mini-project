@@ -26,7 +26,7 @@ To install the project:
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/DuckyShine004/opengl-voxel-engine.git
+   git clone https://github.com/DuckyShine004/nzpmc-mini-project.git
    ```
 2. Navigate to `root/backend` and `root/frontend` and run the following command in this directory
    ```sh
