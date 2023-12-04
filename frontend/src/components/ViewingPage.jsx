@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 import Heading from "./Heading"
+import UserList from './UserList'
 
 const baseURL = '/api/users'
 
@@ -25,13 +26,7 @@ const ViewingPage = () => {
   return (
     <div>
       <Heading heading="Viewing Page" />
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            Name: {user.name}, DOB: {user.dob ? new Date(user.dob).toLocaleDateString() : 'N/A'}
-          </li>
-        ))}
-      </ul>
+      <UserList users={users} />
     </div>
   )
 }
