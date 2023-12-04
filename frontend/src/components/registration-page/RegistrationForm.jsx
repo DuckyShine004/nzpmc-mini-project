@@ -15,11 +15,37 @@ const RegistrationForm = () => {
 
   const navigate = useNavigate()
 
-  const handleNameChange = (event) => setName(event.target.value)
-  const handleDobChange = (event) => setDob(event.target.value)
+  const handleNameChange = (event) => {
+    setName(event.target.value)
+  }
+
+  const handleDobChange = (event) => {
+    setDob(event.target.value)
+  }
+
+  const isNameValid = (userName) => {
+    return userName.length >= 5
+  }
+
+  const isDobValid = (userDob) => {
+    const todayDate = new Date()
+    const dobDate = new Date(userDob)
+
+    return dobDate <= todayDate
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!isNameValid(name)) {
+      alert('Invalid name. Name must be at least 5 characters.')
+      return;
+    }
+
+    if (!isDobValid(dob)) {
+      alert('Invalid date of birth. Please enter a valid date.')
+      return;
+    }
 
     try {
       const newUser = {
