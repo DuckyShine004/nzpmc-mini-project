@@ -1,15 +1,19 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 import registrationService from '../services/registration'
 
 import FormInput from './FormInput'
 import Heading from './Heading'
+import Button from './Button'
 
 const baseURL = '/api/registration'
 
 const RegistrationForm = () => {
   const [name, setName] = useState('')
   const [dob, setDob] = useState('')
+
+  const navigate = useNavigate()
 
   const handleNameChange = (event) => setName(event.target.value)
   const handleDobChange = (event) => setDob(event.target.value)
@@ -48,6 +52,7 @@ const RegistrationForm = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      <Button onClick={() => navigate('/view')} text="Go To Viewing Page" />
     </div>
   )
 }
